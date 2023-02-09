@@ -1,5 +1,6 @@
 import { useState } from "react"
-import mapAr from "./mapAr"
+import MapAr from "./MapAr"
+import { Canvas, useFrame } from '@react-three/fiber'
 
 function App() {
   const [stage,setStage]=useState(0)
@@ -59,11 +60,21 @@ function App() {
   })
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} className="form">
-        {inputs}
-        <button className="form--button">Submit</button>
-      </form>
+    <div className="app">
+      {stage===0 && 
+        <form onSubmit={handleSubmit} className="form">
+          {inputs}
+          <button className="form--button">Submit</button>
+        </form>
+      }
+      {stage===1 && 
+        <Canvas>
+          <color args={[254,192,203]} attach="background"/>
+          <ambientLight intensity={0.5} />
+          <pointLight position={[10, 10, 10]} />
+          <MapAr position={[0, -1, -1]}/>
+        </Canvas>
+      }
     </div>
   )
 }

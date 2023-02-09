@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Canvas, useFrame, useLoader} from '@react-three/fiber'
-import { OrbitControls, Stats, Text } from "@react-three/drei";
+import { OrbitControls, Stats, Text, } from "@react-three/drei";
 import { ImageLoader, TextureLoader } from 'three'
 
 function MapAr(props) {
@@ -9,7 +9,12 @@ function MapAr(props) {
     // Hold state for hovered and clicked events
     const [hovered, hover] = useState(false)
     const [clicked, click] = useState(false)
-    console.log(ref)
+    // useEffect(()=>{
+    //   console.log(ref)
+    //   if(ref){
+    //     ref.current.position.x=200
+    //   }
+    // },[ref])
     // Subscribe this component to the render-loop, rotate the mesh every frame
     // useFrame((state, delta) => (ref.current.rotation.x += delta))
     const something = useLoader(TextureLoader,"something.png")
@@ -20,9 +25,8 @@ function MapAr(props) {
           {...props}
           material=""
           ref={ref}
-          rotation={[0.4,0,0]}
           scale={clicked ? 1.5 : 1}
-          onClick={(event) => click(!clicked)}
+          // onClick={(event) => click(!clicked)}
           onPointerOver={(event) => hover(true)}
           onPointerOut={(event) => hover(false)}>
           <boxGeometry args={[6,0.05,6]} />
@@ -30,8 +34,9 @@ function MapAr(props) {
         </mesh>
         <Text
           {...props}
-          position={[0,0,0]}
+          position={[-1.6,-1.5,-0.3]}
           scale={[1,1,1]}
+          fontSize={0.2}
           color="black"
           >
             HELLO

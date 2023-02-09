@@ -1,6 +1,7 @@
 import { useState } from "react"
 import MapAr from "./MapAr"
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas, useFrame, } from '@react-three/fiber'
+import { OrbitControls, Stats,Text, PerspectiveCamera} from "@react-three/drei";
 
 function App() {
   const [stage,setStage]=useState(0)
@@ -32,7 +33,9 @@ function App() {
     console.log(subjects)
     setStage(1)
   }
-
+  function r(degrees){
+    return degrees / (180/Math.PI)
+  }
   const inputs=[1,2,3,4,5,6,7,8].map((period)=>{
     return (
       <>
@@ -69,10 +72,16 @@ function App() {
       }
       {stage===1 && 
         <Canvas>
-          <color args={[254,192,203]} attach="background"/>
+          <OrbitControls />
+          <PerspectiveCamera
+            makeDefault
+            position={[0,0,0]}
+            rotation={[0.142124,0,0]}
+          />
+          <color args={[254,192,203]} attach="background" />
           <ambientLight intensity={0.5} />
           <pointLight position={[10, 10, 10]} />
-          <MapAr position={[0, -1, -1]}/>
+          <MapAr position={[0, -1, -8]} visible={true} rotation={[0,0,0]} r={r}/>
         </Canvas>
       }
     </div>

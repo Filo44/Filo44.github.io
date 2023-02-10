@@ -4,7 +4,7 @@ import { OrbitControls, Stats, Text, } from "@react-three/drei";
 import { ImageLoader, TextureLoader } from 'three'
 
 function MapAr({subjects,classrooms}) {
-    
+
     const ref = useRef()
 
     const something = useLoader(TextureLoader,"something.png")
@@ -13,7 +13,9 @@ function MapAr({subjects,classrooms}) {
       camera.rotation.set(deg2rad(-40), 0, 0);
       camera.position.set(0, 3, 4);
     });
-    const textElements=
+    const textElements=subjects.map((subject)=>{
+      
+    })
 
     return (
       <>

@@ -1,6 +1,7 @@
 import { useState } from "react"
 import MapAr from "./MapAr"
-import { Canvas, useFrame, } from '@react-three/fiber'
+import { Canvas, useFrame,useThree } from '@react-three/fiber'
+
 import { OrbitControls, Stats,Text, PerspectiveCamera} from "@react-three/drei";
 
 function App() {
@@ -72,16 +73,16 @@ function App() {
       }
       {stage===1 && 
         <Canvas>
-          <OrbitControls />
-          <PerspectiveCamera
+          {/* <OrbitControls position={[0, 3, ]}/> */}
+          {/* <PerspectiveCamera
             makeDefault
             position={[0,0,0]}
             rotation={[0.142124,0,0]}
-          />
+          /> */}
           <color args={[254,192,203]} attach="background" />
           <ambientLight intensity={0.5} />
           <pointLight position={[10, 10, 10]} />
-          <MapAr position={[0, -1, -8]} visible={true} rotation={[0,0,0]} r={r}/>
+          <MapAr/>
         </Canvas>
       }
     </div>

@@ -82,7 +82,7 @@ function App() {
           <color args={[254,192,203]} attach="background" />
           <ambientLight intensity={0.5} />
           <pointLight position={[10, 10, 10]} />
-          <MapAr/>
+          <MapAr subjects={subjects}/>
         </Canvas>
       }
     </div>

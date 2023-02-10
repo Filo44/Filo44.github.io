@@ -14,15 +14,16 @@ function MapAr({subjects,classrooms}) {
       camera.position.set(0, 3, 4);
     });
     
-    const textElements=subjects.map((subject)=>{
-      console.log(subjectToCoords[subject])
+
+    const textElements=classrooms.map((classroom)=>{
+      console.log(subjectToCoords[classroom])
       return <Text
-                position={subjectToCoords[subject]}
+                position={subjectToCoords[classroom]}
                 scale={[1,1,1]}
                 fontSize={0.2}
                 color="black"
               >
-                {subject}
+                {classroom}
               </Text>
     })
 

@@ -3,11 +3,19 @@ import { Canvas, useFrame, useLoader,useThree,extend} from '@react-three/fiber'
 import { OrbitControls, Stats, Text, } from "@react-three/drei";
 import { ImageLoader, TextureLoader } from 'three'
 
-function MapAr({subjects,classrooms,subjectToCoords,map1}) {
+function MapAr({subjects,classrooms,subjectToCoordsNO,map1,offset}) {
     const ref = useRef()
     const [mapNum,setMapNum]=useState(0)
-
+    console.log(offset)
+    let subjectToCoords={...subjectToCoordsNO}
+    Object.keys(subjectToCoords).forEach(function(key, index) {
+      subjectToCoords[key] = sum(subjectToCoords[key],offset);
+    });
     // const [map1,map2] = useLoader(TextureLoader,["map1.png","map2.png"])
+    function sum(arr1,arr2){
+      return arr1.map(function (num, idx) {
+          return num + arr2[idx];
+    })};
     const deg2rad = degrees => degrees * (Math.PI / 180);
     // let subjectToCoords=[{
     //   "S4":[-1.65, 0.07,2.24],
@@ -27,8 +35,8 @@ function MapAr({subjects,classrooms,subjectToCoords,map1}) {
     
     var i=-1;
     const textElements=classrooms.map((classroom)=>{
-
-      console.log(subjectToCoords[classroom])
+      if(subjectToCoords[classroom]){
+        console.log(subjectToCoords[classroom])
       i++
       let period=Object.keys(subjects)[i]
       let posHigher=[...subjectToCoords[classroom]]
@@ -59,6 +67,8 @@ function MapAr({subjects,classrooms,subjectToCoords,map1}) {
             </Text>
             </>
       )
+      }
+      
     })
 
     return (
@@ -66,6 +76,7 @@ function MapAr({subjects,classrooms,subjectToCoords,map1}) {
         <mesh
           material=""
           ref={ref}
+          position={offset}
           >
           <boxGeometry args={[6,0.05,6]} />
           <meshStandardMaterial  map={map1}/>

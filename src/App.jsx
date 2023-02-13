@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useState } from "react"
+import { Suspense, useEffect, useState, startTransition} from "react"
 import MapAr from "./MapAr"
 import { Canvas, useFrame, useLoader,useThree,extend} from '@react-three/fiber'
 import { ImageLoader, TextureLoader } from 'three'
@@ -52,7 +52,9 @@ function App() {
     e.preventDefault()
     console.log(classrooms)
     console.log(subjects)
-    setStage(1)
+    startTransition(() => {
+      setStage(1)
+    });
   }
   function r(degrees){
     return degrees / (180/Math.PI)
@@ -104,6 +106,7 @@ function App() {
     )
   })
   return (
+    <Suspense fallback={null}>
     <div className="app">
       {stage===0 && 
         <>
@@ -129,7 +132,7 @@ function App() {
             <MapAr
              classrooms={Object.values(classrooms[selectedDay])}
               subjects={subjects[selectedDay]} 
-              subjectToCoords={{
+              subjectToCoordsNO={{
                 "S4":[-1.65, 0.07,2.24],
                 "S5":[-1.7285441830896375,0.09, 1.0440000000000005],
                 "S6":[-1.8698170516352333,0.09, -0.3959999999999999],
@@ -140,11 +143,30 @@ function App() {
                 "S10":[1.4642226460408274,0.09, -0.48]
               }}
               map1={useLoader(TextureLoader,"map1.png")}
+              offset={[0,0,0]}
+              />
+              <MapAr
+             classrooms={Object.values(classrooms[selectedDay])}
+              subjects={subjects[selectedDay]} 
+              subjectToCoordsNO={{
+                "S4":[-1.65, 0.07,2.24],
+                "S5":[-1.7285441830896375,0.09, 1.0440000000000005],
+                "S6":[-1.8698170516352333,0.09, -0.3959999999999999],
+                "S7":[-2.124108215017306,0.09, -1.644],
+                "S8":[-0.8950342586706226,0.09, -1.116],
+                "S9":[0.34816698453062145,0.09, -1.092],
+                "S11":[0.07974853429398898,0.09, -2.676],
+                "S10":[1.4642226460408274,0.09, -0.48]
+              }}
+              map1={useLoader(TextureLoader,"map2.png")}
+              offset={[0,0.3,0]}
               />
           </Canvas>
+          
       </>
       }
     </div>
+    </Suspense>
   )
 }
 

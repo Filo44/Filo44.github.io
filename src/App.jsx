@@ -50,8 +50,6 @@ function App() {
   }
   function handleSubmit(e){
     e.preventDefault()
-    console.log(classrooms)
-    console.log(subjects)
     startTransition(() => {
       setStage(1)
     });
@@ -130,9 +128,9 @@ function App() {
             <ambientLight intensity={0.5} />
             <pointLight position={[10, 10, 10]} />
             <MapAr
-             classrooms={Object.values(classrooms[selectedDay])}
               subjects={subjects[selectedDay]} 
-              subjectToCoordsNO={{
+              classrooms={Object.values(classrooms[selectedDay])}
+              subjectToCoords={{
                 "S4":[-1.65, 0.07,2.24],
                 "S5":[-1.7285441830896375,0.09, 1.0440000000000005],
                 "S6":[-1.8698170516352333,0.09, -0.3959999999999999],
@@ -144,23 +142,18 @@ function App() {
               }}
               map1={useLoader(TextureLoader,"map1.png")}
               offset={[0,0,0]}
-              />
-              <MapAr
-             classrooms={Object.values(classrooms[selectedDay])}
+            />
+            <MapAr
               subjects={subjects[selectedDay]} 
-              subjectToCoordsNO={{
-                "S4":[-1.65, 0.07,2.24],
-                "S5":[-1.7285441830896375,0.09, 1.0440000000000005],
-                "S6":[-1.8698170516352333,0.09, -0.3959999999999999],
-                "S7":[-2.124108215017306,0.09, -1.644],
-                "S8":[-0.8950342586706226,0.09, -1.116],
-                "S9":[0.34816698453062145,0.09, -1.092],
-                "S11":[0.07974853429398898,0.09, -2.676],
-                "S10":[1.4642226460408274,0.09, -0.48]
+              classrooms={Object.values(classrooms[selectedDay])}
+              subjectToCoords={{
+                "Library":[-0.9814309120699072,0.07, 1.8480000000000008],
+                "S3":[-0.7979246313489896,0.07, -0.7800000000000002],
+                "S13":[-2.344620425996723,0.07, -1.68]
               }}
               map1={useLoader(TextureLoader,"map2.png")}
               offset={[0,0.3,0]}
-              />
+            />
           </Canvas>
           
       </>

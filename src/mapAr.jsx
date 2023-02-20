@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { Canvas, useFrame, useLoader,useThree,extend} from '@react-three/fiber'
-import { OrbitControls, Stats, Text } from "@react-three/drei";
+import React, { useRef } from 'react'
+import {useThree} from '@react-three/fiber'
+import { Text } from "@react-three/drei";
 // import { ImageLoader, TextureLoader } from 'three'
 
 function MapAr({subjects,classrooms,subjectToCoords,map1,offset,angle}) {

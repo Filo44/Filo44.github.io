@@ -1,19 +1,54 @@
-.form{
-  display: grid;
-  grid-template-columns:1fr 1fr 1fr 1fr;
-}
 body,#root,.app,canvas,html{
   height: 100%;
   margin:0px;
 }
+.app{
+  background-color: #9FB4C7;
+}
+.form{
+  display: grid;
+  grid-template-columns:1fr 1fr 1fr;
+  background-color: #EEEEFF;
+  margin:10px;
+  border-radius: 4px;
+  padding: 2px;
+}
+.form *{
+  /* border: black solid 1px; */
+  padding: 2px;
+  text-align: center;
+}
+select{
+  border:none;
+  background-color: inherit;
+}
+.buttons{
+  display:flex;
+  justify-content: space-around;
+}
+.buttons *{
+  border:none;
+  background-color: #28587B;
+  color:#FAFAFF;
+  height:50px;
+  border-radius: 3px;
+  margin: 3px;
+  padding: 2px 8px;
+}
 .previews{
   display:flex;
-  gap:20px;
+  justify-content: space-around;
 }
 .preview{
   width:100px !important;
   height:100px !important;
 }
 .mainCanvas{
-  height:70% !important;
+  height:calc(100vh - 17px - 100px) !important;
+}
+@media only screen and (min-width: 768px) {
+
+  .form{
+    grid-template-columns:1fr 2fr 2fr;
+  }
 }

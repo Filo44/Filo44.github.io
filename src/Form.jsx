@@ -4,28 +4,28 @@ function Form({subjects,classrooms,handleSubmit,handleChange,visible}){
     const inputs=[1,2,3,4,5,6,7,8].map((period)=>{
         return (
           <>
-            <label htmlFor={"subject"+period}>Period {period} subject:</label>
+            <label htmlFor={"subject"+period}>{period}</label>
             <select
               name={period}
               id={"classroom"+period}
               className="class"
-              value={classrooms[period]}
+              value={subjects[period]}
               onChange={handleChange}
             >
+              <option value=""></option>
               <option value="Science">Science</option>
-              <option value="Maths"></option>
-              <option value="English"></option>
-              <option value="French"></option>
-              <option value="Mandarin"></option>
-              <option value="Spanish"></option>
-              <option value="Individuals & Society"></option>
-              <option value="PE"></option>
-              <option value="Design"></option>
-              <option value="Music"></option>
-              <option value="Art"></option>
-              <option value="Drama"></option>
+              <option value="Maths">Maths</option>
+              <option value="English">English</option>
+              <option value="French">French</option>
+              <option value="Mandarin">Mandarin</option>
+              <option value="Spanish">Spanish</option>
+              <option value="Individuals &Individuals Society"></option>
+              <option value="PE">PE</option>
+              <option value="Design">Design</option>
+              <option value="Music">Music</option>
+              <option value="Art">Art</option>
+              <option value="Drama">Drama</option>
             </select>
-            <label htmlFor={"classroom"+period}>Period {period} classroom(e.g S8):</label>
             <select
               name={period}
               id={"classroom"+period}
@@ -33,7 +33,7 @@ function Form({subjects,classrooms,handleSubmit,handleChange,visible}){
               value={classrooms[period]}
               onChange={handleChange}
             >
-              <option value="">Free Period</option>
+              <option value=""></option>
               <option value="S4">S4</option>
               <option value="S5">S5</option>
               <option value="S6">S6</option>
@@ -62,6 +62,9 @@ function Form({subjects,classrooms,handleSubmit,handleChange,visible}){
         <>
             {visible &&
                 <form onSubmit={handleSubmit} className="form">
+                    <div>Periods</div>
+                    <div>Subject</div>
+                    <div>Classroom</div>
                     {inputs}
                     <button className="form--button">Submit</button>
                 </form>

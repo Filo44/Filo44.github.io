@@ -63,7 +63,7 @@ function App() {
     }
     return false
   }
-  function handleChange(event,day) {
+  function handleChange(event) {
     if(event.target.className=="class"){
       setSubjects(prevFormData => {
         let prevArrC=[...prevFormData]

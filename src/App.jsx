@@ -1,5 +1,5 @@
 import { Suspense, useEffect, useState, startTransition} from "react"
-import MapAr from "/src/MapAr"
+import MapAr from "./MapAr.jsx"
 import { Canvas, useLoader} from '@react-three/fiber'
 import {TextureLoader } from 'three'
 import Form from "./Form"

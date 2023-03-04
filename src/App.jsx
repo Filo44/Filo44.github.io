@@ -10,11 +10,13 @@ import { OrbitControls} from "@react-three/drei";
 
 function App() {
   const [stage,setStage]=useState(0)
-  const [subjects,setSubjects]=useState([{},{},{},{},{}])
-  const [classrooms,setClassrooms]=useState([{},{},{},{},{}])
+  const [subjects,setSubjects]=useState(JSON.parse(localStorage.getItem("subjects"))|| [{},{},{},{},{}])
+  const [classrooms,setClassrooms]=useState(JSON.parse(localStorage.getItem("classrooms"))|| [{},{},{},{},{}])
   const [selectedDay,setSelectedDay]=useState(0)
   const [selectedMap,setSelectedMap]=useState(1)
+  const [notes,setNotes]=useState(["","","","",""])
   //JSON.parse(localStorage.getItem("classrooms"))||
+  const [noteSelectedPeriod,setNoteSelectedPeriod]=useState(null)
   const numToDay={0:"Monday",1:"Tuesday",2:"Wednesday",3:"Thursday",4:"Friday"}
   const posArrays=[
     {
@@ -46,7 +48,7 @@ function App() {
     "Hall":[0.05728796848641604,0.07, 1.2240000000000002]
   }
   ]
-  
+  console.log(noteSelectedPeriod)
 
   useEffect(()=>{
     localStorage.setItem("subjects",JSON.stringify(subjects))
@@ -54,6 +56,9 @@ function App() {
   useEffect(()=>{
     localStorage.setItem("classrooms",JSON.stringify(classrooms))
   },[classrooms])
+  useEffect(()=>{
+    setNoteSelectedPeriod(null)
+  },[selectedDay])
 
   function hasSomething(allClassrooms,mapClassrooms){ 
     for(let i=0; i<allClassrooms.length;i++){
@@ -136,8 +141,10 @@ function App() {
           <ambientLight intensity={0.5} />
           <pointLight position={[10, 10, 10]} />
           <MapAr
+              setNoteSelectedPeriod={setNoteSelectedPeriod}
               subjects={subjects[selectedDay]} 
               classrooms={Object.values(classrooms[selectedDay])}
+              noteSelectedPeriod={noteSelectedPeriod}
               subjectToCoords={posArrays[num]}
               map1={useLoader(TextureLoader,`map${num+1}.png`)}
               offset={[0,-1,-1]}
@@ -181,8 +188,10 @@ function App() {
               <ambientLight intensity={0.9} />
               <pointLight position={[10, 10, 10]} intensity={0}/>
               {selectedMap==0 && <MapAr
+                setNoteSelectedPeriod={setNoteSelectedPeriod}
                 subjects={subjects[selectedDay]} 
                 classrooms={Object.values(classrooms[selectedDay])}
+                noteSelectedPeriod={noteSelectedPeriod}
                 subjectToCoords={posArrays[0]}
                 angle={-40}
                 map1={useLoader(TextureLoader,"map1.png")}
@@ -190,8 +199,10 @@ function App() {
               />
             }
             {selectedMap==1 && <MapAr
+                setNoteSelectedPeriod={setNoteSelectedPeriod}
                 subjects={subjects[selectedDay]} 
                 classrooms={Object.values(classrooms[selectedDay])}
+                noteSelectedPeriod={noteSelectedPeriod}
                 subjectToCoords={posArrays[1]}
                 angle={-40}
                 map1={useLoader(TextureLoader,"map2.png")}
@@ -199,8 +210,10 @@ function App() {
               />
             }
             {selectedMap==2 && <MapAr
+                setNoteSelectedPeriod={setNoteSelectedPeriod}
                 subjects={subjects[selectedDay]} 
                 classrooms={Object.values(classrooms[selectedDay])}
+                noteSelectedPeriod={noteSelectedPeriod}
                 subjectToCoords={posArrays[2]}
                 angle={-40}
                 map1={useLoader(TextureLoader,"map3.png")}
@@ -208,8 +221,10 @@ function App() {
               />
               }
               {selectedMap==3 && <MapAr
+                setNoteSelectedPeriod={setNoteSelectedPeriod}
                 subjects={subjects[selectedDay]} 
                 classrooms={Object.values(classrooms[selectedDay])}
+                noteSelectedPeriod={noteSelectedPeriod}
                 subjectToCoords={posArrays[3]}
                 angle={-40}
                 map1={useLoader(TextureLoader,"map4.png")}

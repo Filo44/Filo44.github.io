@@ -1,9 +1,9 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState} from 'react'
 import {useThree} from '@react-three/fiber'
 import { Text } from "@react-three/drei";
 // import { ImageLoader, TextureLoader } from 'three'
 
-function MapAr({subjects,classrooms,subjectToCoords,map1,offset,angle}) {
+function MapAr({subjects,classrooms,subjectToCoords,map1,offset,angle,setNoteSelectedPeriod,noteSelectedPeriod}) {
   console.log(classrooms)
   const ref = useRef()
   // console.log(offset)
@@ -19,6 +19,14 @@ function MapAr({subjects,classrooms,subjectToCoords,map1,offset,angle}) {
     return arr1.map(function (num, idx) {
       return num + arr2[idx];
   })};
+  function handleHover(i,on){
+    setTextState(prevTextState=>{
+      return {
+        ...prevTextState,
+        [i]:{hovered:on?true:false}
+      }
+    })
+  }
   const deg2rad = degrees => degrees * (Math.PI / 180);
   useThree(({camera}) => {
     // console.log(camera.rotation.x)
@@ -36,16 +44,17 @@ function MapAr({subjects,classrooms,subjectToCoords,map1,offset,angle}) {
       let period=Object.keys(subjects)[i]
       let posHigher=[...subjectToCoords[classroom]]
       posHigher[1]=0.27
-      console.log(posHigher)
+      console.log(`noteselctedperiod=${noteSelectedPeriod} period=${period}`)
       return (
         <>
           <Text
               key={i}
               position={sum(posHigher,offset)}
+              onClick={()=>setNoteSelectedPeriod(period)}
               // position={posHigher}            
               scale={[1,1,1]}
               fontSize={0.2}
-              color="black"
+              color={noteSelectedPeriod==period?"#05576e":"black"}
             >
               {Object.values(subjects)[i]}
               {/* classroom */}
@@ -54,10 +63,11 @@ function MapAr({subjects,classrooms,subjectToCoords,map1,offset,angle}) {
             <Text
               key={i}
               position={sum(subjectToCoords[classroom],offset)}
+              onClick={()=>setNoteSelectedPeriod(period)}
               // position={subjectToCoords[classroom]}
               scale={[1,1,1]}
               fontSize={0.2}
-              color="black"
+              color={noteSelectedPeriod==period?"#05576e":"black"}
             >
               {`Period ${period}| ${ Math.floor(((period*50)+(period<4?475:495))/60)+":"+Math.floor(((period*50)+(period<4?475:495))%60).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}`}
               {/* classroom */}
@@ -67,6 +77,7 @@ function MapAr({subjects,classrooms,subjectToCoords,map1,offset,angle}) {
       )
     }
   })
+
 
   return (
     <>

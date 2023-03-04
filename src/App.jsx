@@ -14,7 +14,7 @@ function App() {
   const [classrooms,setClassrooms]=useState(JSON.parse(localStorage.getItem("classrooms"))|| [{},{},{},{},{}])
   const [selectedDay,setSelectedDay]=useState(0)
   const [selectedMap,setSelectedMap]=useState(1)
-  const [notes,setNotes]=useState(["","","","",""])
+  const [notes,setNotes]=useState([{},{},{},{},{}])
   //JSON.parse(localStorage.getItem("classrooms"))||
   const [noteSelectedPeriod,setNoteSelectedPeriod]=useState(null)
   const numToDay={0:"Monday",1:"Tuesday",2:"Wednesday",3:"Thursday",4:"Friday"}

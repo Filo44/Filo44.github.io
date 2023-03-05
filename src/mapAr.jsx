@@ -1,10 +1,11 @@
 import React, { useRef, useState} from 'react'
 import {useThree} from '@react-three/fiber'
 import { Text } from "@react-three/drei";
+import { nanoid } from 'nanoid'
 // import { ImageLoader, TextureLoader } from 'three'
 
 function MapAr({subjects,classrooms,subjectToCoords,map1,offset,angle,setNoteSelectedPeriod,noteSelectedPeriod}) {
-  console.log(classrooms)
+  // console.log(classrooms)
   const ref = useRef()
   // console.log(offset)
   function hasSomething(allClassrooms,mapClassrooms){ 
@@ -48,7 +49,7 @@ function MapAr({subjects,classrooms,subjectToCoords,map1,offset,angle,setNoteSel
       return (
         <>
           <Text
-              key={i}
+              key={nanoid()}
               position={sum(posHigher,offset)}
               onClick={()=>setNoteSelectedPeriod(period)}
               // position={posHigher}            
@@ -61,7 +62,7 @@ function MapAr({subjects,classrooms,subjectToCoords,map1,offset,angle,setNoteSel
               
             </Text>
             <Text
-              key={i}
+              key={nanoid()}
               position={sum(subjectToCoords[classroom],offset)}
               onClick={()=>setNoteSelectedPeriod(period)}
               // position={subjectToCoords[classroom]}

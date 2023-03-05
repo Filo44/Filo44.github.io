@@ -1,11 +1,13 @@
+import React from 'react'
+import { nanoid } from 'nanoid'
+
 function Form({subjects,classrooms,handleSubmit,handleChange,visible}){
-
-
     const inputs=[1,2,3,4,5,6,7,8].map((period)=>{
         return (
           <>
-            <label htmlFor={"subject"+period}>{period}</label>
+            <label key={nanoid()} htmlFor={"subject"+period}>{period}</label>
             <select
+              key={nanoid()}
               name={period}
               id={"classroom"+period}
               className="class"
@@ -27,6 +29,7 @@ function Form({subjects,classrooms,handleSubmit,handleChange,visible}){
               <option value="Drama">Drama</option>
             </select>
             <select
+              key={nanoid()}
               name={period}
               id={"classroom"+period}
               className="subject"

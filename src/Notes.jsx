@@ -1,44 +1,71 @@
 import React, { useState, useEffect } from 'react';
 
-function Notes({setNote}) {
-    const [notes,setNotes]=useState([{},{},{},{},{}])
-    const [noteData,setNoteData]=useState({})
+function Notes({selectedDay,noteSelectedPeriod,noteSelectedSubject,clearNoteSelect}) {
+    const [notes,setNotes]=useState([{1:"",2:"",3:"",4:"",5:"",6:"",7:"",8:"",},{1:"",2:"",3:"",4:"",5:"",6:"",7:"",8:"",},{1:"",2:"",3:"",4:"",5:"",6:"",7:"",8:"",},{1:"",2:"",3:"",4:"",5:"",6:"",7:"",8:"",},{1:"",2:"",3:"",4:"",5:"",6:"",7:"",8:"",}])
+    const [subjectNotes,setSubjectNotes]=useState([
+        { Science: "" , Maths: "", English: "", French: "", Mandarin: "", Spanish: "", "Individuals & Individuals Society": "", PE: "", Design: "", Music: "", Art: "", Drama: "" }
+      ])
+
+
+    useEffect(()=>{
+        console.log("created")
+    },[])
+
     function handleChange(e){
-        setNoteData(prevNoteData=>{
-            return {
-                ...prevNoteData,
-                [e.target.name]:e.target.value
-            }
+        setNotes(prevNotes=>{
+            let copyOfNotes=[...prevNotes]
+            copyOfNotes[selectedDay][noteSelectedPeriod]=e.target.value
+            return copyOfNotes
         })
     }
-    
-    console.log(setNote)
-    useEffect(()=>{
-        setNote(noteData)
-    },[noteData])
+    function handleSubjectChange(e){
+        setSubjectNotes(prevNotes=>{
+            let copyOfNotes=[...prevNotes]
+            copyOfNotes[noteSelectedSubject]=e.target.value
+            return copyOfNotes
+        })
+    }
+    function handleNoteOut(e){
+        clearNoteSelect()
+    }
+
+    const noteData=notes[selectedDay][noteSelectedPeriod]
+    const subjectData=subjectNotes[noteSelectedSubject]
 
     return (
-        <div className='notes'>
-            <label htmlFor='note--subject'>Subject notes</label>
-            <textarea
-                className='note'
-                id="note--subject"
-                name='subject'
-                onChange={handleChange}
-                value={noteData["subject"]}
-            >
-            </textarea>
-            <textarea
-                className='note'
-                id="note--period"
-                name='period'
-                onChange={handleChange}
-                value={noteData["period"]}
-            >
-            </textarea>
-        </div>
+        <>
+            {noteSelectedPeriod!=null && 
+            <>
+                <div className='anticlick' onClick={handleNoteOut}>
+                </div>
+                <div className='notes'>
+                    <label htmlFor='note--subject' className='note--label'>{noteSelectedSubject} notes</label>
+                    <textarea
+                        className='note'
+                        id="note--subject"
+                        name='subject'
+                        onChange={handleSubjectChange}
+                        value={subjectData}
+                    >
+                    </textarea>
+                    <label htmlFor='note--period' className='note--label'>Period notes</label>
+                    <textarea
+                        className='note'
+                        id="note--period"
+                        name='period'
+                        onChange={handleChange}
+                        value={noteData}
+                    >
+                    </textarea>
+                </div>
+            </>
+            
+            
+            }
+        </>
+        
     
     );
 }
 
-export default Note;
+export default Notes;

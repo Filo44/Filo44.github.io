@@ -216,11 +216,12 @@ function App() {
               <pointLight position={[10, 10, 10]} intensity={0}/>
               {maps}
             </Canvas>
-            {noteSelectedPeriod!=null && 
-              <Note
-                setNote={(newNote)=>handleChangeNote()}
+              <Notes
+                selectedDay={selectedDay}
+                noteSelectedPeriod={noteSelectedPeriod}
+                noteSelectedSubject={subjects[selectedDay][noteSelectedPeriod]}
+                clearNoteSelect={()=>setNoteSelectedPeriod(null)}
               />
-            }
             
         </>
         }

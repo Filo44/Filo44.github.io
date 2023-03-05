@@ -2,6 +2,9 @@ body,#root,.app,canvas,html{
   height: 100%;
   margin:0px;
 }
+body{
+  overflow-x: hidden;
+}
 .app{
   background-color: #9FB4C7;
 }
@@ -46,6 +49,47 @@ select{
 .mainCanvas{
   height:calc(100vh - 156px) !important;
 }
+
+.anticlick{
+  height:60vh;
+  box-sizing: content-box;
+  position: absolute;
+  top:0px;
+  width:100%;
+}
+.notes{
+  animation: pullup 1s ease-out 0s 1 forwards;
+  height:40vh;
+  position: absolute;
+  width:100%;
+  top: 60vh;
+  background-color: white;
+  border-radius: 10px;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+.note{
+  height: 50%;
+  border:none;
+  border-radius: 10px;
+  background-color: white;
+  line-height: 15px;
+  background-image: repeating-linear-gradient(white 0px, white 14px, teal 15px);
+  box-shadow: 0px 0px 5px 0px #888;
+}
+textarea { resize: none; }
+
+@keyframes pullup {
+  0%{
+    top:100vh;
+  }
+  100%{
+    top:60vh
+  }
+}
+
+
 @media only screen and (min-width: 768px) {
 
   .form{

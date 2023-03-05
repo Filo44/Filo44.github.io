@@ -21,7 +21,7 @@ function Form({subjects,classrooms,handleSubmit,handleChange,visible}){
               <option value="French">French</option>
               <option value="Mandarin">Mandarin</option>
               <option value="Spanish">Spanish</option>
-              <option value="Individuals &Individuals Society"></option>
+              <option value="Individuals & Individuals Society"></option>
               <option value="PE">PE</option>
               <option value="Design">Design</option>
               <option value="Music">Music</option>

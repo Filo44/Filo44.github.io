@@ -1,10 +1,9 @@
 body,#root,.app,canvas,html{
   height: 100%;
   margin:0px;
-}
-body{
   overflow-x: hidden;
 }
+
 .app{
   background-color: #9FB4C7;
 }
@@ -49,13 +48,15 @@ select{
 .mainCanvas{
   height:calc(100vh - 156px) !important;
 }
-
+.note--label:nth-child(1){
+    margin-top:20px;
+}
 .anticlick{
   height:60vh;
   box-sizing: content-box;
   position: absolute;
   top:0px;
-  width:100%;
+  width:100
 }
 .notes{
   animation: pullup 1s ease-out 0s 1 forwards;
@@ -70,13 +71,25 @@ select{
   align-items: center;
 }
 .note{
-  height: 50%;
+  height: 45%;
+  width:80%;
   border:none;
   border-radius: 10px;
   background-color: white;
   line-height: 15px;
   background-image: repeating-linear-gradient(white 0px, white 14px, teal 15px);
   box-shadow: 0px 0px 5px 0px #888;
+}
+.notedown{
+  animation: pushdown 0.3s linear 0s 1 forwards;
+}
+.note--closeButton{
+  position: absolute;
+  top:3px;
+  background: none;
+  border: none;
+  right: 3px;
+
 }
 textarea { resize: none; }
 
@@ -86,6 +99,14 @@ textarea { resize: none; }
   }
   100%{
     top:60vh
+  }
+}
+@keyframes pushdown {
+  0%{
+    top:60vh;
+  }
+  100%{
+    top:100vh
   }
 }
 

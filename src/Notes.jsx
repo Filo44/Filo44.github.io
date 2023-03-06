@@ -5,6 +5,7 @@ function Notes({selectedDay,noteSelectedPeriod,noteSelectedSubject,clearNoteSele
     const [subjectNotes,setSubjectNotes]=useState([
         { Science: "" , Maths: "", English: "", French: "", Mandarin: "", Spanish: "", "Individuals & Individuals Society": "", PE: "", Design: "", Music: "", Art: "", Drama: "" }
       ])
+    const [goingDown,setGoingDown]=useState(false)
 
 
     useEffect(()=>{
@@ -25,8 +26,12 @@ function Notes({selectedDay,noteSelectedPeriod,noteSelectedSubject,clearNoteSele
             return copyOfNotes
         })
     }
-    function handleNoteOut(e){
-        clearNoteSelect()
+    function handleNoteOut(){
+        setGoingDown(true)
+        setTimeout(()=>{
+            setGoingDown(false)
+            clearNoteSelect()
+        },300)
     }
 
     const noteData=notes[selectedDay][noteSelectedPeriod]
@@ -38,7 +43,8 @@ function Notes({selectedDay,noteSelectedPeriod,noteSelectedSubject,clearNoteSele
             <>
                 <div className='anticlick' onClick={handleNoteOut}>
                 </div>
-                <div className='notes'>
+                <div className={`notes ${goingDown?"notedown":""}`}>
+                    
                     <label htmlFor='note--subject' className='note--label'>{noteSelectedSubject} notes</label>
                     <textarea
                         className='note'
@@ -57,6 +63,7 @@ function Notes({selectedDay,noteSelectedPeriod,noteSelectedSubject,clearNoteSele
                         value={noteData}
                     >
                     </textarea>
+                    <button className='note--closeButton' onClick={handleNoteOut}>✖</button>
                 </div>
             </>
             

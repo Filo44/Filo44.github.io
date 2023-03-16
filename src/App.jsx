@@ -5,6 +5,7 @@ import {TextureLoader } from 'three'
 import Form from "./Form"
 import Notes from "./Notes"
 import { nanoid } from 'nanoid'
+import { VRButton, ARButton, XR, Controllers, Hands } from '@react-three/xr'
 // import ARScene from "./ARScene"
 
 import { OrbitControls} from "@react-three/drei";
@@ -210,12 +211,23 @@ function App() {
           <div className="previews">
             {previews}
           </div>
-            <Canvas className="mainCanvas">
-              <OrbitControls position={[0,3,0]}/>
-              <ambientLight intensity={0.9} />
-              <pointLight position={[10, 10, 10]} intensity={0}/>
+          <VRButton sessionInit={true}/>
+            <Canvas>
+              <XR>
+                <OrbitControls position={[0,3,0]}/>
+                <ambientLight intensity={0.9} />
+                <pointLight position={[10, 10, 10]} intensity={0}/>
+              
               {maps}
+              </XR>
             </Canvas>
+            {/* <Canvas className="mainCanvas">
+                <OrbitControls position={[0,3,0]}/>
+                <ambientLight intensity={0.9} />
+                <pointLight position={[10, 10, 10]} intensity={0}/>
+              
+              {maps}
+            </Canvas> */}
               <Notes
                 selectedDay={selectedDay}
                 noteSelectedPeriod={noteSelectedPeriod}
